@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Carousel Hero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .hero {
+            padding: 1.5em;
+            height: 100vh;
+            min-height: 40em;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-items: center;
+        }
+
+        .carousels-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+
+        .infinite-carousel {
+            margin: 2em 0;
+            max-width: 1000px;
+            width: 90%;
+        }
+
+        .infinite-carousel>div {
+            height: max-content;
+            width: 100%;
+            padding: 0 0.5em;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            gap: 0.8em;
+            list-style: none;
+        }
+
+        .infinite-carousel img {
+            max-width: 12em;
+            border-radius: 8px;
+        }
+
+        .hero-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-text>div {
+            max-width: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 3em;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin: 1em 0;
+            line-height: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: .7em 1.5em;
+            border-radius: 8px;
+            background-color: #ff4545;
+            color: white;
+            font-size: 1.2em;
+            transform: 200ms;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #e93f3f;
+        }
+
+        @keyframes move {
+            to {
+                transform: translateY(calc(-50% - .4em));
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text {
+                order: 1;
+                padding: 2em 1.5em;
+            }
+
+            .carousels-container {
+                order: 2;
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            .infinite-carousel img {
+                width: 80%;
+            }
+
+            .hero {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero">
+        <div class="carousels-container">
+            <div class="infinite-carousel">
+                <div>
+                    <img src="https://picsum.photos/id/50/500/600" alt="img">
+                    <img src="https://picsum.photos/id/51/500/600" alt="img">
+                    <img src="https://picsum.photos/id/52/500/600" alt="img">
+                    <img src="https://picsum.photos/id/53/500/600" alt="img">
+                    <img src="https://picsum.photos/id/54/500/600" alt="img">
+                    <img src="https://picsum.photos/id/55/500/600" alt="img">
+                </div>
+            </div>
+            <div class="infinite-carousel">
+                <div>
+                    <img src="https://picsum.photos/id/56/500/600" alt="img">
+                    <img src="https://picsum.photos/id/57/500/600" alt="img">
+                    <img src="https://picsum.photos/id/58/500/600" alt="img">
+                    <img src="https://picsum.photos/id/59/500/600" alt="img">
+                    <img src="https://picsum.photos/id/60/500/600" alt="img">
+                    <img src="https://picsum.photos/id/61/500/600" alt="img">
+                </div>
+            </div>
+            <div class="infinite-carousel">
+                <div>
+                    <img src="https://picsum.photos/id/62/500/600" alt="img">
+                    <img src="https://picsum.photos/id/63/500/600" alt="img">
+                    <img src="https://picsum.photos/id/64/500/600" alt="img">
+                    <img src="https://picsum.photos/id/65/500/600" alt="img">
+                    <img src="https://picsum.photos/id/66/500/600" alt="img">
+                    <img src="https://picsum.photos/id/67/500/600" alt="img">
+                </div>
+            </div>
+        </div>
+        <div class="hero-text">
+            <div>
+                <h1>SnapSpectrum</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi rerum recusandae voluptate debitis
+                    porro tenetur. Odit quae exercitationem voluptatem? Numquam.</p>
+                <a href="#" class="btn">Explore</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        const carousels = document.querySelectorAll(".infinite-carousel");
+        const directions = [
+            "normal", "reverse", "normal"
+        ];
+        const speed = [10, 12, 15];
+        carousels.forEach((carousel, i) => {
+            const carouselInner = carousel.querySelector(".infinite-carousel div");
+            const carouselContent = Array.from(carouselInner.children);
+            carouselContent.forEach(item => {
+                const duplicatedItem = item.cloneNode(true);
+                carouselInner.appendChild(duplicatedItem);
+            });
+            carouselInner.style.animation = `move ${speed[i]}s linear infinite ${directions[i]}`;
+        });
+    </script>
+</body>
+
+</html>
